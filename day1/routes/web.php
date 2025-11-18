@@ -8,7 +8,7 @@ Route::get('/', function () {
 });
 
 Route::get('/ping', function () {
-    return 'pong';
+    return response.json(['response' => 'pong']);
 });
 
 Route::post('/tasks', [TaskController::class, 'store']);
