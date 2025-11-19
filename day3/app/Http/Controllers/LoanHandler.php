@@ -9,9 +9,9 @@ use App\Models\User;
 class LoanHandler extends Controller
 {
     public function index(){
-       $owingUser = User::with(['repayments'])->get();
-         return response()->json($owingUser);
+        $hasRepayments = Loan::whereHas('repayments')->with('repayments')->get();
 
+        return response()->json($hasRepayments);
     }
 
     public function store(Request $request){
