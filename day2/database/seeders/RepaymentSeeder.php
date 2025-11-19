@@ -4,15 +4,15 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\LoanPractice;
+use \App\Models\Repayment;
 
-class LoanPracticeSeeder extends Seeder
+class RepaymentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        LoanPractice::factory(20)->create();
+        Repayment::factory(5)->create();
     }
 }

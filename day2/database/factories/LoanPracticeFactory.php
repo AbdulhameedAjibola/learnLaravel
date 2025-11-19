@@ -20,7 +20,8 @@ class LoanPracticeFactory extends Factory
             'amount' => $this->faker->numberBetween(1000,10000),
             'status' => $this->faker->randomElement(['paid', 'due', 'overdue', 'pending']),
             'user-name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail()
+            'email' => $this->faker->unique()->safeEmail(),
+
         ];
     }
 }

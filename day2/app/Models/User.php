@@ -12,6 +12,7 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -45,4 +46,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+    //user has multiple loans but the loan belongs to one user
+    public function loans(): HasMany{
+        return $this->hasMany(Loan::class);
+    }
+
+    //user has multiple repayments through loans(multiple repayments for multiple loans(each loan has multiple repayments))
+    public function repayments(): HasManyThrough{
+        // first paramenter final dest, second is intermediate
+        return $this->hasManyThrough(Repayment::class, Loan::class);
+    }
+
+    
+
 }
