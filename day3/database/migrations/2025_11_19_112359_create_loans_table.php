@@ -19,8 +19,8 @@ return new class extends Migration
             $table->decimal('interest_rate', 5, 2);
             $table->decimal('total_amount', 12, 2);
             $table->integer('duration_months');
-            $table->decimal('monthly_installment', 10, 2);
-            $table->decimal('outstanding_balance', 12, 2);
+            $table->decimal('monthly_installment', 10, 2)->default(0.00);
+            $table->decimal('outstanding_balance', 12, 2)->default(0.00);
             $table->date('start_date');
             $table->date('end_date');
             $table->timestamps();

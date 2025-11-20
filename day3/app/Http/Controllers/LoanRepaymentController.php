@@ -13,8 +13,9 @@ class LoanRepaymentController extends Controller
       public function createRepayment(Request $request, $loan_id){
 
         $data = $request -> validate([
-            'instalment_amount' => 'required|numeric',
-            'payment_status' => 'required|in: paid, processing, failed'
+            'installment_amount' => 'required|numeric',
+            'payment_status' => 'required|in:paid,processing,failed'
+
         ]);
 
         $loan = Loan::find($loan_id);
@@ -25,13 +26,13 @@ class LoanRepaymentController extends Controller
 
         $repayment = Repayment::create([
             'loan_id' => $loan->id,
-            'instalment_amount' => $data['installment_amount'],
-            'remaining_balance' => $loan->outstanding_balance - $data['instalment_amount'],
+            'installment_amount' => $data['installment_amount'],
+            'remaining_balance' => $loan->outstanding_balance - $data['installment_amount'],
             'payment_date' => now(),
             'payment_status' => $data['payment_status']
 
         ]);
-        $loan->outstanding_balance -= $data['instalment_amount'];
+        $loan->outstanding_balance -= $data['installment_amount'];
         $loan->save();
 
         return response()-> json([

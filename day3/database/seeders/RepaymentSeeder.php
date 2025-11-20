@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use \App\Models\Repayment;
+use \App\Models\Loan;
 
 class RepaymentSeeder extends Seeder
 {
@@ -13,6 +14,14 @@ class RepaymentSeeder extends Seeder
      */
     public function run(): void
     {
-        Repayment::factory(5)->create();
+         $loans = Loan::all();
+
+        foreach($loans as $loan){
+            Repayment::factory()->create([
+                 'loan_id' => $loan->id,
+            ]
+               
+            );
+        };
     }
 }

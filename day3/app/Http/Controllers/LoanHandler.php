@@ -15,8 +15,17 @@ class LoanHandler extends Controller
         return response()->json($hasRepayments);
     }
 
-    public function store(Request $request){
-        $data = $request->all();
+    public function store(Request $request, $user_id){
+        $data = $request->validate([
+            'loan_type_id' => 'required|exists:loan_types,id',
+            'principal' => 'required|numeric',
+            'interest_rate' => 'required|numeric',
+            'duration_months' => 'required|integer',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after:start_date',
+        ]);
+
+        $data['user_id'] = $user_id;
 
         $totalAmount = $data['principal'] + ($data['principal'] * $data['interest_rate']/100);
         $monthlyInstallments = $totalAmount / $data['duration_months'];
@@ -43,9 +52,12 @@ class LoanHandler extends Controller
         $data = $request->only([
             
             'monthly_installment',
-            'outstanding_balance',
+            
             
         ]);
+        $outstandingBal = $loan->total_amount -= $data['monthly_installment'];
+        $loan->outstanding_balance = $outstandingBal;
+        
         $loan->update($data);
 
         return response()->json($loan);

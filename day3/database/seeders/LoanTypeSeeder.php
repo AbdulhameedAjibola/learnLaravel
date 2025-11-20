@@ -13,6 +13,6 @@ class LoanTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        LoanType::factory(5)->create();
+        LoanType::factory(10)->create();
     }
 }
