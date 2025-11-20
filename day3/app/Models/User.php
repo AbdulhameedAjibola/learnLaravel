@@ -8,7 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-
+use App\Models\Loan;
+use App\Models\Repayment;
 
 class User extends Authenticatable
 {
