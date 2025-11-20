@@ -17,7 +17,7 @@ class LoanType extends Model
         'loan_name',
         'duration',
         'interest_rate',
-        'max-amount',
+        'max_amount',
 
     ];
 

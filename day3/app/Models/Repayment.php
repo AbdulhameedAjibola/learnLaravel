@@ -16,14 +16,13 @@ class Repayment extends Model
     protected $fillable = [
         'loan_id',
         'installment_amount',
-        
         'remaining_balance',
         'payment_date',
         'payment_status',
     ];
 
     // multiple repayments belong to one loan
-    public function loanRepayment(): BelongsTo{
+    public function loan(): BelongsTo{
         return $this->belongsTo(Loan::class);
     }
     

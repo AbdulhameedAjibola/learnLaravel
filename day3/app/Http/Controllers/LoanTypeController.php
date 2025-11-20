@@ -29,9 +29,9 @@ class LoanTypeController extends Controller
     public function createLoanType(Request $request){
         $data = $request->validate([
             'loan_name' => 'required|string',
-            'duration' => 'required|integer',
+            'duration' => 'required|string',
             'interest_rate' => 'required|numeric',
-            'max-amount' => 'required|numeric',
+            'max_amount' => 'required|numeric',
         ]);
 
         $loan_type = LoanType::create($data);
