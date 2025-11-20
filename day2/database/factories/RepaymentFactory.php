@@ -17,8 +17,9 @@ class RepaymentFactory extends Factory
      */
     public function definition(): array
     {
+        
         return [
-            'loan_id' => Loan::factory(),
+            'loan_id' => Loan::inRandomOrder()->first()->id,
             'instalment_amount' => $this->faker->randomFloat(2, 100, 5000),
             'remaining_balance' => $this->faker->randomFloat(2, 0, 20000),
             'payment_date' => $this->faker->date(),
