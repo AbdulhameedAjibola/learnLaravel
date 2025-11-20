@@ -55,10 +55,10 @@ class LoanRepaymentController extends Controller
             return response()->json(['message' => 'Repayment does not exist'], 404);
         }
 
-        $data = $request->only([
-            'installment_amount',
-            'payment_status',
-            
+        $data = $request -> validate([
+            'installment_amount' => 'required|numeric',
+            'payment_status' => 'required|in:paid,processing,failed'
+
         ]);
 
         $loan = $repayment->loan;
