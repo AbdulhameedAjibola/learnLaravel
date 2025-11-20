@@ -14,6 +14,14 @@ class LoanType extends Model
     /** @use HasFactory<\Database\Factories\LoanTypeFactory> */
     use HasFactory;
 
+    protected $fillable = [
+        'loan_name',
+        'duration',
+        'interest_rate',
+        'max-amount',
+
+    ];
+
      // one loan type can be for multiple loans
 
     public function loans(): HasMany{

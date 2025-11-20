@@ -13,6 +13,19 @@ class Loan extends Model
     /** @use HasFactory<\Database\Factories\LoanFactory> */
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'loan_type_id',
+        'principal',
+        'interest_rate',
+        'total_amount',
+        'duration_months',
+        'monthly_installment',
+        'outstanding_balance',
+        'start_date',
+        'end_date',
+    ];
+
     // loan belong to one user (user can have multiple loans but they still belong to one user)
 
     public function user(): BelongsTo{

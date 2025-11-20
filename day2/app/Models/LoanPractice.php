@@ -9,4 +9,11 @@ class LoanPractice extends Model
 {
     /** @use HasFactory<\Database\Factories\LoanPracticeFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'amount',
+        'status',
+        'user-name',
+        'email'
+    ];
 }
