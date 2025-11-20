@@ -17,7 +17,7 @@ class Repayment extends Model
      protected $fillable = [
         'loan_id',
         'instalment_amount',
-        'instalment_amount',
+        
         'remaining_balance',
         'payment_date',
         'payment_status',

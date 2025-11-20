@@ -33,7 +33,7 @@ class Loan extends Model
     }
     
     // multiple loans belong to one loan type
-    public function loan_type():BelongsTo{
+    public function loanType():BelongsTo{
         return $this->belongsTo(LoanType::class);
     }
 
