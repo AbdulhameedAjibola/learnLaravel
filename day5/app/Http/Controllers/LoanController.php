@@ -1,0 +1,68 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Loan;
+use App\Http\Requests\StoreLoanRequest;
+use App\Http\Requests\UpdateLoanRequest;
+use App\Http\Resources\LoanResource;
+use App\Http\Resources\LoanCollection;
+
+class LoanController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        return new LoanCollection(Loan::paginate());
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreLoanRequest $request)
+    {
+        return new LoanResource(Loan::create($request->all()));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Loan $loan)
+    {
+        return new LoanResource($loan);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Loan $loan)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateLoanRequest $request, Loan $loan)
+    {
+        $loan->update($request->all());
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Loan $loan)
+    {
+        $loan->delete();
+    }
+}
