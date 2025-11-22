@@ -64,6 +64,12 @@ RUN groupadd --force -g $WWWGROUP sail
 RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u 1337 sail
 RUN git config --global --add safe.directory /var/www/html
 
+COPY . /var/www/html
+RUN cd /var/www/html && \
+    composer install --no-dev --optimize-autoloader && \
+    chown -R sail:sail /var/www/html && \
+    chmod -R 755 /var/www/html/storage /var/www/html/bootstrap/cache
+    
 COPY docker/8.4/start-container /usr/local/bin/start-container
 COPY docker/8.4/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker/8.4/php.ini /etc/php/8.4/cli/conf.d/99-sail.ini
