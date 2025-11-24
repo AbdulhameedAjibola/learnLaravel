@@ -19,12 +19,12 @@ Route::middleware('auth:sanctum')->group(function (){
         return $request->user();
     });
 
-  Route::apiResource('loans', LoanController::class);  
-Route::apiResource('repayments', RepaymentController::class);
 
+Route::apiResource('repayments', RepaymentController::class);
+ Route::apiResource('loans', LoanController::class);  
 Route::post('/logout', [AuthController::class, 'logoutUser']);
 
 });
 
-
+ 
 

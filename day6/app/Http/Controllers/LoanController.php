@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LoanType;
-use App\Http\Requests\StoreLoanTypeRequest;
-use App\Http\Resources\loanTypeResource;
-use App\Http\Resources\loanTypeCollection;
-use App\Http\Requests\UpdateLoanTypeRequest;
+use App\Models\Loan;
+use App\Http\Requests\StoreLoanRequest;
+use App\Http\Requests\UpdateLoanRequest;
 
-class LoanTypeController extends Controller
+class LoanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return new loanTypeCollection(LoanType::paginate());
+        //
     }
 
     /**
@@ -29,7 +27,7 @@ class LoanTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreLoanTypeRequest $request)
+    public function store(StoreLoanRequest $request)
     {
         //
     }
@@ -37,7 +35,7 @@ class LoanTypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(LoanType $loanType)
+    public function show(Loan $loan)
     {
         //
     }
@@ -45,7 +43,7 @@ class LoanTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(LoanType $loanType)
+    public function edit(Loan $loan)
     {
         //
     }
@@ -53,7 +51,7 @@ class LoanTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateLoanTypeRequest $request, LoanType $loanType)
+    public function update(UpdateLoanRequest $request, Loan $loan)
     {
         //
     }
@@ -61,7 +59,7 @@ class LoanTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(LoanType $loanType)
+    public function destroy(Loan $loan)
     {
         //
     }
