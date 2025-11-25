@@ -37,6 +37,7 @@ services:
 
     depends_on:
       - mysql
+      - redis
 
   mysql:
     image: mysql/mysql-server:8.0
@@ -52,11 +53,56 @@ services:
         - sail-mysql:/var/lib/mysql
     networks:
         - sail
+        
     healthcheck:
         test: ["CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}"]
         retries: 5
         timeout: 5s
+  queue-worker:
+    image: sail-8.3/app
+    restart: always
+    volumes:
+      - ".:/var/www/html"
+    depends_on:
+      - mysql
+      - redis
+    command: >
+      sh -c '
+        echo "Starting Laravel Queue Worker...";
+        php artisan queue:work redis --queue=default --sleep=3 --tries=1;
+      '
+    networks:
+      - sail
+  scheduler:
+    image: sail-8.3/app
+    restart: always
+    volumes:
+      - ".:/var/www/html"
+    depends_on:
+      - quickfund_database
+      - redis
+    command: >
+      sh -c "
+        while true; do
+          php artisan schedule:run --verbose --no-interaction;
+          sleep 60;
+        done
+      "
+    networks:
+      - sail
 
+  redis:
+    image: "redis:alpine"
+    restart: always
+    volumes:
+      - ".:/var/www/html"
+    networks:
+      - sail
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      retries: 3
+      timeout: 5s
+    command: redis-server --appendonly yes --replica-read-only no
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin

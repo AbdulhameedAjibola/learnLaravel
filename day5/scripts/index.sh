@@ -41,6 +41,11 @@ echo "============================================"
 $COMPOSE exec -T $SERVICE php artisan migrate --force
 
 echo "============================================"
+echo "📅 Running Laravel scheduler once..."
+echo "============================================"
+$COMPOSE exec -T $SERVICE php artisan schedule:run
+
+echo "============================================"
 echo "🔍 Checking logs..."
 echo "============================================"
 $COMPOSE logs --tail=100 $SERVICE
