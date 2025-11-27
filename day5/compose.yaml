@@ -79,7 +79,7 @@ services:
     volumes:
       - ".:/var/www/html"
     depends_on:
-      - quickfund_database
+      - mysql
       - redis
     command: >
       sh -c "
